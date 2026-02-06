@@ -1,0 +1,195 @@
+[gd_scene load_steps=31 format=3 uid="uid://j1ja46lynk8u"]
+
+[ext_resource type="PackedScene" uid="uid://cvo80ypjqt4na" path="res://Blends/BaseCharacter/BaseCharacter.blend" id="1_8cynu"]
+[ext_resource type="Script" uid="uid://c4rwxrnftg2r5" path="res://Scripts/BaseCharacter/BaseCharacter.cs" id="1_70akh"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_70akh"]
+radius = 0.18408203
+height = 1.7963867
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wnu8y"]
+animation = &"Falling idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wfrm5"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gr5nx"]
+animation = &"landing"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i18g5"]
+break_loop_at_end = true
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"fall"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4mdcx"]
+xfade_time = 0.2
+break_loop_at_end = true
+priority = 2
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"jump"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ufnhn"]
+break_loop_at_end = true
+priority = 2
+advance_mode = 2
+advance_condition = &"land"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rw4un"]
+xfade_time = 0.2
+break_loop_at_end = true
+priority = 2
+advance_mode = 2
+advance_condition = &"land"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_70akh"]
+xfade_time = 0.2
+break_loop_at_end = true
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"fall"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_mwck2"]
+"states/Falling idle/node" = SubResource("AnimationNodeAnimation_wnu8y")
+"states/Falling idle/position" = Vector2(392, -2)
+states/jump/node = SubResource("AnimationNodeAnimation_wfrm5")
+states/jump/position = Vector2(392, 173)
+states/landing/node = SubResource("AnimationNodeAnimation_gr5nx")
+states/landing/position = Vector2(564, 90)
+transitions = ["Start", "Falling idle", SubResource("AnimationNodeStateMachineTransition_i18g5"), "Start", "jump", SubResource("AnimationNodeStateMachineTransition_4mdcx"), "Falling idle", "landing", SubResource("AnimationNodeStateMachineTransition_ufnhn"), "jump", "landing", SubResource("AnimationNodeStateMachineTransition_rw4un"), "jump", "Falling idle", SubResource("AnimationNodeStateMachineTransition_70akh")]
+graph_offset = Vector2(-79, -130)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s4cdh"]
+animation = &"Running"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5yv1g"]
+animation = &"Running right strafe"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l5myr"]
+animation = &"Running strafe left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ttwcu"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eimu8"]
+animation = &"Running"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o0vaj"]
+animation = &"Running right strafe"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rgy0h"]
+animation = &"Running strafe left"
+play_mode = 1
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_eimu8"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_s4cdh")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_5yv1g")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_l5myr")
+blend_point_2/pos = Vector2(-1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_ttwcu")
+blend_point_3/pos = Vector2(0, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_eimu8")
+blend_point_4/pos = Vector2(0, -1)
+blend_point_5/node = SubResource("AnimationNodeAnimation_o0vaj")
+blend_point_5/pos = Vector2(-0.4, -0.6)
+blend_point_6/node = SubResource("AnimationNodeAnimation_rgy0h")
+blend_point_6/pos = Vector2(0.4, -0.6)
+sync = true
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_s4cdh"]
+xfade_time = 0.2
+input_0/name = "Walking"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Running"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+input_2/name = "InAir"
+input_2/auto_advance = false
+input_2/break_loop_at_end = false
+input_2/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_70akh"]
+animation = &"Walking forward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3rf7k"]
+animation = &"Walking backward"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7s4re"]
+animation = &"Walking strafe left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_50nsp"]
+animation = &"Walking strafe right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e5aie"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8cynu"]
+animation = &"Walking strafe left"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xp00k"]
+animation = &"Walking strafe right"
+play_mode = 1
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_xp00k"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_70akh")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_3rf7k")
+blend_point_1/pos = Vector2(0, -1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_7s4re")
+blend_point_2/pos = Vector2(-1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_50nsp")
+blend_point_3/pos = Vector2(1, 0)
+blend_point_4/node = SubResource("AnimationNodeAnimation_e5aie")
+blend_point_4/pos = Vector2(0, 0)
+blend_point_5/node = SubResource("AnimationNodeAnimation_8cynu")
+blend_point_5/pos = Vector2(0.4, -0.6)
+blend_point_6/node = SubResource("AnimationNodeAnimation_xp00k")
+blend_point_6/pos = Vector2(-0.4, -0.6)
+sync = true
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_5yv1g"]
+graph_offset = Vector2(-629.25214, 499.00308)
+nodes/output/position = Vector2(180, 720)
+nodes/Walking/node = SubResource("AnimationNodeBlendSpace2D_xp00k")
+nodes/Walking/position = Vector2(-360, 580)
+nodes/Transition/node = SubResource("AnimationNodeTransition_s4cdh")
+nodes/Transition/position = Vector2(-40, 700)
+nodes/Running/node = SubResource("AnimationNodeBlendSpace2D_eimu8")
+nodes/Running/position = Vector2(-360, 800)
+nodes/InAir/node = SubResource("AnimationNodeStateMachine_mwck2")
+nodes/InAir/position = Vector2(-400, 1040)
+node_connections = [&"output", 0, &"Transition", &"Transition", 0, &"Walking", &"Transition", 1, &"Running", &"Transition", 2, &"InAir"]
+
+[node name="BaseCharacter" type="CharacterBody3D" node_paths=PackedStringArray("animation_tree")]
+script = ExtResource("1_70akh")
+animation_tree = NodePath("AnimationTree")
+
+[node name="BaseCharacter" parent="." instance=ExtResource("1_8cynu")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.89819336, 0)
+shape = SubResource("CapsuleShape3D_70akh")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../BaseCharacter")
+tree_root = SubResource("AnimationNodeBlendTree_5yv1g")
+anim_player = NodePath("../BaseCharacter/AnimationPlayer")
+parameters/Walking/blend_position = Vector2(0, 0)
+parameters/Transition/current_state = "InAir"
+parameters/Transition/transition_request = ""
+parameters/Transition/current_index = 2
+parameters/Running/blend_position = Vector2(0.0047847033, -0.112107635)
+parameters/InAir/conditions/fall = false
+parameters/InAir/conditions/jump = false
+parameters/InAir/conditions/land = false
+
+[editable path="BaseCharacter"]
